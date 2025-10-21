@@ -2,9 +2,9 @@ name: Run Scraper
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # chạy mỗi ngày 0h UTC (7h sáng VN)
-  workflow_dispatch:
-  push:
+    - cron: "0 0 * * *"   # chạy mỗi ngày lúc 0h UTC (7h sáng VN)
+  workflow_dispatch:      # cho phép chạy thủ công
+  push:                   # chạy khi push code mới
 
 jobs:
   run-scraper:
@@ -21,18 +21,20 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4 nbconvert jupyter pandas
+          pip install requests beautifulsoup4 nbconvert jupyter pandas openpyxl
 
       - name: Convert and run notebook
         run: |
           jupyter nbconvert --to python API.ipynb
-          python API.py
+          python API.py > log.txt 2>&1 || true
 
-      - name: Commit results
+      - name: Commit scraped data
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add .
-          git commit -m "Auto scrape data $(date)" || echo "No changes"
+          git add nhatot_phongtro_danang_all.xlsx
+          git add log.txt
+          git commit -m "Auto scrape data $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes"
           git push
+
 
