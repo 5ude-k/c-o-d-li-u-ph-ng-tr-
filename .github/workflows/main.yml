@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4 nbconvert jupyter pandas openpyxl sqlite3
+          pip install requests beautifulsoup4 nbconvert jupyter pandas openpyxl
 
       - name: Convert and run notebook
         run: |
@@ -54,11 +54,16 @@ jobs:
           print("✅ Đã tạo file data.sql thành công!")
           EOF
 
-      - name: Commit scraped data + SQL
+      - name: Compress data files
+        run: |
+          zip -r data.zip nhatot_phongtro_danang_all.xlsx data.sql log.txt
+          echo "✅ Đã nén thành data.zip"
+
+      - name: Commit scraped data + SQL + ZIP
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add nhatot_phongtro_danang_all.xlsx data.sql log.txt
+          git add nhatot_phongtro_danang_all.xlsx data.sql log.txt data.zip
           git commit -m "Auto scrape & SQL update $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
           git push
 
