@@ -2,9 +2,9 @@ name: Run Scraper
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # chạy mỗi ngày lúc 0h UTC (tức 7h sáng VN)
-  workflow_dispatch:       # cho phép chạy thủ công
-  push:                    # chạy khi push code mới
+    - cron: "0 0 * * *"  # chạy mỗi ngày 0h UTC (7h sáng VN)
+  workflow_dispatch:
+  push:
 
 jobs:
   run-scraper:
@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4 nbconvert jupyter
+          pip install requests beautifulsoup4 nbconvert jupyter pandas
 
       - name: Convert and run notebook
         run: |
@@ -35,3 +35,4 @@ jobs:
           git add .
           git commit -m "Auto scrape data $(date)" || echo "No changes"
           git push
+
