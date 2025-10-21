@@ -1,82 +1,88 @@
-name: Run Scraper
+name: Run Scraper (No Excel)
 
 on:
   schedule:
-    - cron: "0 17 * * *"   
-  workflow_dispatch:
-  push:
+    - cron: "0 17 * * *"  
+  workflow_dispatch:      
+  push:                   
 
 jobs:
   run-scraper:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   
+      contents: write  # cho phép push lại file kết quả
 
     steps:
+      # --- 1️⃣ Clone repo ---
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # --- 2️⃣ Cài Python ---
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
+      # --- 3️⃣ Cài thư viện cần thiết ---
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4 nbconvert jupyter pandas openpyxl
+          pip install requests beautifulsoup4 nbconvert jupyter pandas sqlite-utils openpyxl
 
+      # --- 4️⃣ Chạy scraper ---
       - name: Convert and run notebook
         run: |
           jupyter nbconvert --to python API.ipynb
           python API.py |& tee log.txt
 
-      - name: Create UTF-8 SQLite dump (.sql)
+      # --- 5️⃣ Tạo file .sql UTF-8 ---
+      - name: Generate SQL dump (UTF-8)
         run: |
           python - <<'EOF'
-          import pandas as pd
-          import sqlite3
-          import os
+          import pandas as pd, sqlite3, os
 
-          excel_file = "nhatot_phongtro_danang_all.xlsx"
+          data_path = "nhatot_phongtro_danang.csv"  # file xuất ra từ scraper
           sql_file = "data.sql"
 
-          if not os.path.exists(excel_file):
-              print(f"❌ Không tìm thấy file {excel_file}")
+          if not os.path.exists(data_path):
+              print(f"❌ Không tìm thấy file {data_path}")
               exit(1)
 
-          print(f"🔄 Đang tạo {sql_file} từ {excel_file}...")
+          print("🔄 Đang tạo data.sql từ CSV (không qua Excel)...")
 
-          # Đọc Excel đảm bảo giữ tiếng Việt
-          df = pd.read_excel(excel_file, dtype=str)
+          # Đọc dữ liệu với mã hóa UTF-8
+          df = pd.read_csv(data_path, dtype=str, encoding="utf-8")
 
-          # Tạo DB SQLite tạm
+          # Tạo SQLite DB tạm
           conn = sqlite3.connect("temp.db")
           df.to_sql("nhatot_phongtro_danang", conn, if_exists="replace", index=False)
 
-          # Xuất SQL dạng UTF-8 (chuẩn tiếng Việt)
-          with open(sql_file, "w", encoding="utf-8") as f:
+          # Xuất ra file SQL
+          with open(sql_file, "w", encoding="utf-8-sig") as f:
               for line in conn.iterdump():
-                  f.write(f"{line}\n")
+                  f.write(f"{line.strip()}\n")
 
           conn.close()
           os.remove("temp.db")
-          print("✅ Đã tạo file data.sql (UTF-8) thành công!")
+          print("✅ Xuất file data.sql (UTF-8) thành công!")
           EOF
 
+      # --- 6️⃣ Nén kết quả ---
       - name: Compress result files
         run: |
-          zip -r data.zip nhatot_phongtro_danang_all.xlsx data.sql log.txt
+          zip -r data.zip nhatot_phongtro_danang.csv data.sql log.txt
           echo "✅ Đã nén toàn bộ thành data.zip"
 
+      # --- 7️⃣ Commit và push kết quả ---
       - name: Commit result files
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add nhatot_phongtro_danang_all.xlsx data.sql log.txt data.zip
-          git commit -m "Auto scrape + SQL UTF-8 update $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes"
+          git add nhatot_phongtro_danang.csv data.sql log.txt data.zip
+          git commit -m "Auto scrape + SQL update $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes"
           git push
+
 
 
 
