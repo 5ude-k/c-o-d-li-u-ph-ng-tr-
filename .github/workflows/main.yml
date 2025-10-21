@@ -2,7 +2,7 @@ name: Run Scraper
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 17 * * *"   # ✅ 0h00 Việt Nam (UTC+7)
   workflow_dispatch:
   push:
 
@@ -10,13 +10,13 @@ jobs:
   run-scraper:
     runs-on: ubuntu-latest
     permissions:
-      contents: write    # ✅ Quan trọng: cho phép push lên repo
+      contents: write   # Cho phép push file kết quả
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}  # dùng token mặc định để push
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -25,20 +25,41 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4 nbconvert jupyter pandas openpyxl
+          pip install requests beautifulsoup4 nbconvert jupyter pandas openpyxl sqlite3
 
       - name: Convert and run notebook
         run: |
           jupyter nbconvert --to python API.ipynb
-          python API.py > log.txt 2>&1 || true
+          python API.py |& tee log.txt
 
-      - name: Commit scraped data
+      - name: Create SQLite database (.sql)
+        run: |
+          python - <<'EOF'
+          import pandas as pd
+          import sqlite3
+          import os
+
+          excel_file = "nhatot_phongtro_danang_all.xlsx"
+          sql_file = "data.sql"
+
+          if not os.path.exists(excel_file):
+              print(f"❌ Không tìm thấy file {excel_file}")
+              exit(1)
+
+          print(f"🔄 Đang tạo {sql_file} từ {excel_file}...")
+          df = pd.read_excel(excel_file)
+          conn = sqlite3.connect(sql_file)
+          df.to_sql("nhatot_phongtro_danang", conn, if_exists="replace", index=False)
+          conn.close()
+          print("✅ Đã tạo file data.sql thành công!")
+          EOF
+
+      - name: Commit scraped data + SQL
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add nhatot_phongtro_danang_all.xlsx
-          git add log.txt
-          git commit -m "Auto scrape data $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes"
+          git add nhatot_phongtro_danang_all.xlsx data.sql log.txt
+          git commit -m "Auto scrape & SQL update $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
           git push
 
 
