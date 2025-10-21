@@ -2,13 +2,14 @@ name: Run Scraper
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # chạy mỗi giờ (UTC)
-  workflow_dispatch:     # cho phép chạy thủ công
-  push:                  # chạy khi push code mới
+    - cron: "0 0 * * *"  # chạy mỗi ngày lúc 0h UTC (tức 7h sáng VN)
+  workflow_dispatch:       # cho phép chạy thủ công
+  push:                    # chạy khi push code mới
 
 jobs:
   run-scraper:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -20,10 +21,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests beautifulsoup4
+          pip install requests beautifulsoup4 nbconvert jupyter
 
-      - name: Run scraper
-        run: python scrape.py
+      - name: Convert and run notebook
+        run: |
+          jupyter nbconvert --to python API.ipynb
+          python API.py
 
       - name: Commit results
         run: |
