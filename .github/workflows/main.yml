@@ -2,17 +2,21 @@ name: Run Scraper
 
 on:
   schedule:
-    - cron: "0 0 * * *"   # chạy mỗi ngày lúc 0h UTC (7h sáng VN)
-  workflow_dispatch:      # cho phép chạy thủ công
-  push:                   # chạy khi push code mới
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  push:
 
 jobs:
   run-scraper:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write    # ✅ Quan trọng: cho phép push lên repo
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # dùng token mặc định để push
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -36,5 +40,6 @@ jobs:
           git add log.txt
           git commit -m "Auto scrape data $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes"
           git push
+
 
 
