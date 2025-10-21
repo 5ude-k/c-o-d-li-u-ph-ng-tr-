@@ -2,7 +2,7 @@ name: Run Scraper
 
 on:
   schedule:
-    - cron: "0 17 * * *"   # ✅ 0h00 Việt Nam (UTC+7)
+    - cron: "0 17 * * *"   # ✅ 0h00 giờ Việt Nam (UTC+7)
   workflow_dispatch:
   push:
 
@@ -10,7 +10,7 @@ jobs:
   run-scraper:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # Cho phép push file kết quả
+      contents: write   # Cho phép push file kết quả lên repo
 
     steps:
       - name: Checkout repository
@@ -32,7 +32,7 @@ jobs:
           jupyter nbconvert --to python API.ipynb
           python API.py |& tee log.txt
 
-      - name: Create SQLite database (.sql)
+      - name: Create UTF-8 SQLite dump (.sql)
         run: |
           python - <<'EOF'
           import pandas as pd
@@ -47,24 +47,35 @@ jobs:
               exit(1)
 
           print(f"🔄 Đang tạo {sql_file} từ {excel_file}...")
-          df = pd.read_excel(excel_file)
-          conn = sqlite3.connect(sql_file)
+
+          # Đọc Excel đảm bảo giữ tiếng Việt
+          df = pd.read_excel(excel_file, dtype=str)
+
+          # Tạo DB SQLite tạm
+          conn = sqlite3.connect("temp.db")
           df.to_sql("nhatot_phongtro_danang", conn, if_exists="replace", index=False)
+
+          # Xuất SQL dạng UTF-8 (chuẩn tiếng Việt)
+          with open(sql_file, "w", encoding="utf-8") as f:
+              for line in conn.iterdump():
+                  f.write(f"{line}\n")
+
           conn.close()
-          print("✅ Đã tạo file data.sql thành công!")
+          os.remove("temp.db")
+          print("✅ Đã tạo file data.sql (UTF-8) thành công!")
           EOF
 
-      - name: Compress data files
+      - name: Compress result files
         run: |
           zip -r data.zip nhatot_phongtro_danang_all.xlsx data.sql log.txt
-          echo "✅ Đã nén thành data.zip"
+          echo "✅ Đã nén toàn bộ thành data.zip"
 
-      - name: Commit scraped data + SQL + ZIP
+      - name: Commit result files
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add nhatot_phongtro_danang_all.xlsx data.sql log.txt data.zip
-          git commit -m "Auto scrape & SQL update $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git commit -m "Auto scrape + SQL UTF-8 update $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes"
           git push
 
 
