@@ -2,7 +2,7 @@ name: Run Scraper
 
 on:
   schedule:
-    - cron: "0 17 * * *"   # ✅ 0h00 giờ Việt Nam (UTC+7)
+    - cron: "0 17 * * *"   
   workflow_dispatch:
   push:
 
@@ -10,7 +10,7 @@ jobs:
   run-scraper:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # Cho phép push file kết quả lên repo
+      contents: write   
 
     steps:
       - name: Checkout repository
