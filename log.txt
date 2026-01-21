@@ -2,8 +2,8 @@
 📄 Trang 2 | Offset 50 → 50 tin (Total_ads=None)
 📄 Trang 3 | Offset 100 → 50 tin (Total_ads=None)
 📄 Trang 4 | Offset 150 → 50 tin (Total_ads=None)
-📄 Trang 5 | Offset 200 → 18 tin (Total_ads=None)
+📄 Trang 5 | Offset 200 → 32 tin (Total_ads=None)
 📄 Trang 6 | Offset 250 → 0 tin (Total_ads=None)
 Không còn dữ liệu → Dừng.
 
-✅ Hoàn tất! Đã lưu 218 tin vào nhatot_phongtro_danang_all.xlsx
+✅ Hoàn tất! Đã lưu 232 tin vào nhatot_phongtro_danang_all.xlsx
