@@ -11,6 +11,9 @@ CREATE TABLE "nhatot_phongtro_danang" (
   "Điều hòa" TEXT,
   "Link" TEXT
 );
+INSERT INTO "nhatot_phongtro_danang" VALUES('Cho Thuê Phòng Trọ','900000 đ/tháng','20 m²','Quận Liên Chiểu, Đà Nẵng','Nội thất đầy đủ','0','0','0','1','https://www.nhatot.com/cho-thue-phong-tro/130785901.htm');
+INSERT INTO "nhatot_phongtro_danang" VALUES('phòng trọ cao cấp','2,5 triệu/tháng','25 m²','Quận Cẩm Lệ, Đà Nẵng','0','0','0','1','0','https://www.nhatot.com/cho-thue-phong-tro/130783616.htm');
+INSERT INTO "nhatot_phongtro_danang" VALUES('Cho thuê phòng trọ đường kiệt nguyên xuân hữu','2,2 triệu/tháng','35 m²','Quận Cẩm Lệ, Đà Nẵng','0','0','0','0','1','https://www.nhatot.com/cho-thue-phong-tro/130782780.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('Phòng trọ bên cạnh kcn','1,2 triệu/tháng','20 m²','Quận Liên Chiểu, Đà Nẵng','Nhà trống','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130778343.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('Nhà cho thuê gần sân bay','4 triệu/tháng','40 m²','Quận Hải Châu, Đà Nẵng','0','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130770904.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('cho thuê phòng trọ','2,3 triệu/tháng','16 m²','Quận Hải Châu, Đà Nẵng','0','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/129354389.htm');
@@ -85,11 +88,8 @@ INSERT INTO "nhatot_phongtro_danang" VALUES('Phòng trọ 20m2 đường Trần 
 INSERT INTO "nhatot_phongtro_danang" VALUES('Cho thuê phòng đầy đủ tiện nghi','3,4 triệu/tháng','20 m²','Quận Ngũ Hành Sơn, Đà Nẵng','Nội thất đầy đủ','1','1','0','1','https://www.nhatot.com/cho-thue-phong-tro/130588824.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('Cho thuê trọ','1,6 triệu/tháng','20 m²','Quận Ngũ Hành Sơn, Đà Nẵng','0','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130605821.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('Cho thuê phòng khu vip Thi Sách','2,7 triệu/tháng','20 m²','Quận Hải Châu, Đà Nẵng','Nhà trống','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130604471.htm');
-INSERT INTO "nhatot_phongtro_danang" VALUES('Phòng trọ Trung Tâm - Cao Thắng & Đống Đa','1 triệu/tháng','20 m²','Quận Hải Châu, Đà Nẵng','Nhà trống','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130578598.htm');
-INSERT INTO "nhatot_phongtro_danang" VALUES('Có phòng trọ cho thuê dọn vào ở ngay, sát sông hàn','2,8 triệu/tháng','25 m²','Quận Sơn Trà, Đà Nẵng','Nội thất đầy đủ','0','0','1','0','https://www.nhatot.com/cho-thue-phong-tro/128927575.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('Phòng trọ','1,8 triệu/tháng','25 m²','Huyện Hòa Vang, Đà Nẵng','Nhà trống','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130577688.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('phòng 20 m  cách mặt tiền lê duẩn 20 m','3,5 triệu/tháng','20 m²','Quận Thanh Khê, Đà Nẵng','Nội thất đầy đủ','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130240755.htm');
-INSERT INTO "nhatot_phongtro_danang" VALUES('CĂN ĐẦY ĐỦ NỘI THẤT , CÁCH 5 PHÚT ĐẾN ĐH BÁCH KHOA , KCN HOÀ KHÁNH','1,9 triệu/tháng','18 m²','Quận Liên Chiểu, Đà Nẵng','Nội thất đầy đủ','0','0','1','0','https://www.nhatot.com/cho-thue-phong-tro/130563578.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('Phòng trọ mới xây xong - 2 tầng - giá tốt chỉ 2tr5','2,5 triệu/tháng','20 m²','Quận Thanh Khê, Đà Nẵng','Nhà trống','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130545001.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('CHO THUÊ PHÒNG TRỌ GẦN ĐH SƯ PHẠM, BÁCH KHOA GIÁ RẺ','3 triệu/tháng','25 m²','Quận Liên Chiểu, Đà Nẵng','Nội thất đầy đủ','0','0','0','1','https://www.nhatot.com/cho-thue-phong-tro/130495073.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('Cho thuê phòng ngay trung tâm thành phố, đầy đủ nội thất, gần trường','4 triệu/tháng','25 m²','Quận Thanh Khê, Đà Nẵng','Nội thất đầy đủ','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130505022.htm');
@@ -115,7 +115,6 @@ INSERT INTO "nhatot_phongtro_danang" VALUES('căn hộ 35m2 đường Thanh Ngh�
 INSERT INTO "nhatot_phongtro_danang" VALUES('CHO THUÊ CĂN HỘ / MẶT BẰNG – TRUNG TÂM HÒA XUÂN','5 triệu/tháng','30 m²','Quận Cẩm Lệ, Đà Nẵng','Nội thất đầy đủ','1','1','0','0','https://www.nhatot.com/cho-thue-phong-tro/130346717.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('Phọng trọ khu vực Ngũ Hành Sơn','2 triệu/tháng','20 m²','Quận Ngũ Hành Sơn, Đà Nẵng','Nội thất đầy đủ','0','1','0','1','https://www.nhatot.com/cho-thue-phong-tro/130341656.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('2 Căn Trọ cho Thuê','2,5 triệu/tháng','50 m²','Quận Cẩm Lệ, Đà Nẵng','Nhà trống','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130338937.htm');
-INSERT INTO "nhatot_phongtro_danang" VALUES('CHO THUÊ CĂN HỘ MỚI 100% GIÁ TỐT GẦN ĐẠI HỌC TRUNG TÂM THÀNH PHỐ','4 triệu/tháng','35 m²','Quận Cẩm Lệ, Đà Nẵng','Nội thất đầy đủ','1','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130293994.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('STUDIO MỚI 100% KHU VỰC YÊN TĨNH NHẬN NƯỚC NGOÀI','5,5 triệu/tháng','35 m²','Quận Ngũ Hành Sơn, Đà Nẵng','0','0','0','0','0','https://www.nhatot.com/cho-thue-phong-tro/130305170.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('Phòng trọ gần Đh Y Dược, Việt Hàn, FPT,...','3,2 triệu/tháng','20 m²','Quận Ngũ Hành Sơn, Đà Nẵng','Nội thất đầy đủ','0','0','0','1','https://www.nhatot.com/cho-thue-phong-tro/130304562.htm');
 INSERT INTO "nhatot_phongtro_danang" VALUES('TÌM NỮ Ở GHÉP TRỌ NGAY TTTP','1,2 triệu/tháng','50 m²','Quận Thanh Khê, Đà Nẵng','Nhà trống','1','1','1','1','https://www.nhatot.com/cho-thue-phong-tro/130304540.htm');
