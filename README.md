@@ -1,1 +1,6 @@
-# c-o-d-li-u-ph-ng-tr-
+Tác giả
+Mai Đăng Khương
+Hồ Trọng Huy
+Nguyễn Minh Thịnh
+Ngô Nguyên Khôi
+Vương Nguyễn Hoàng Vinh
