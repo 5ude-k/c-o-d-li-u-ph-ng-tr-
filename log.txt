@@ -10,8 +10,8 @@
 📄 Trang 10 | Offset 450 → 50 tin (Total_ads=None)
 📄 Trang 11 | Offset 500 → 50 tin (Total_ads=None)
 📄 Trang 12 | Offset 550 → 50 tin (Total_ads=None)
-📄 Trang 13 | Offset 600 → 6 tin (Total_ads=None)
+📄 Trang 13 | Offset 600 → 5 tin (Total_ads=None)
 📄 Trang 14 | Offset 650 → 0 tin (Total_ads=None)
 Không còn dữ liệu → Dừng.
 
-✅ Hoàn tất! Đã lưu 606 tin vào nhatot_phongtro_danang_all.xlsx
+✅ Hoàn tất! Đã lưu 605 tin vào nhatot_phongtro_danang_all.xlsx
